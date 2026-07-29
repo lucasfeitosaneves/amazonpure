@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Amazon Pure — Água pura para todos os momentos</title>
 <link rel="icon" type="image/favicon.png" href="images/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -62,6 +62,10 @@
     border-bottom-color:rgba(255,255,255,0.06);
   }
   .nav{display:flex; align-items:center; justify-content:space-between; padding:18px 0;}
+  @media(max-width:640px){
+    header .wrap{padding:0 28px;}
+    .nav{padding:calc(env(safe-area-inset-top, 0px) + 34px) 0 16px;}
+  }
   .logo{display:flex; align-items:center; gap:10px; font-family:'Space Grotesk'; font-weight:700; font-size:20px;}
   .logo .drop{width:22px; height:22px; border-radius:50% 50% 50% 4px; background:linear-gradient(135deg,var(--cyan-400),var(--blue-600)); transform:rotate(45deg);}
   .logo b{color:var(--white);}
@@ -488,6 +492,9 @@
   /* ---------- Footer ---------- */
   footer{background:#04101c; padding:36px 0; border-top:1px solid rgba(255,255,255,0.06);}
   .foot-row{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;}
+  @media(max-width:640px){
+    .foot-row{flex-direction:column; text-align:center; gap:18px;}
+  }
   .foot-links{display:flex; gap:26px; font-size:13.5px; color:var(--muted); flex-wrap:wrap;}
   .foot-links a:hover{color:var(--white);}
   .foot-brand{font-size:13px; color:var(--muted);}
@@ -605,36 +612,16 @@ confiança para toda a população.</p>
   <div class="wrap qs-grid">
     <div class="qs-collage reveal">
       <div class="qs-img qs-img-a">
-        <div class="illus">
-          <svg viewBox="0 0 200 160" width="100%" height="100%">
-            <rect width="200" height="160" fill="none"/>
-            <rect x="10" y="20" width="34" height="120" fill="#1c4d73"/>
-            <rect x="52" y="0" width="40" height="140" fill="#2a6c9c"/>
-            <rect x="100" y="30" width="30" height="110" fill="#1c4d73"/>
-            <rect x="138" y="10" width="46" height="130" fill="#2a6c9c"/>
-            <g fill="#57d6e0" opacity="0.6">
-              <rect x="18" y="34" width="6" height="6"/><rect x="30" y="34" width="6" height="6"/>
-              <rect x="18" y="50" width="6" height="6"/><rect x="30" y="50" width="6" height="6"/>
-              <rect x="60" y="16" width="6" height="6"/><rect x="76" y="16" width="6" height="6"/>
-              <rect x="60" y="32" width="6" height="6"/><rect x="76" y="32" width="6" height="6"/>
-              <rect x="108" y="44" width="6" height="6"/><rect x="118" y="44" width="6" height="6"/>
-              <rect x="148" y="24" width="6" height="6"/><rect x="164" y="24" width="6" height="6"/>
-            </g>
-          </svg>
-        </div>
+        <img src="images/quemsomos-1.jpg" alt="Ambiente corporativo AmazonPure"
+          style="width:100%; height:100%; object-fit:cover; display:block;"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="illus" style="display:none;">Coloque aqui: images/quemsomos-1.jpg</div>
       </div>
       <div class="qs-img qs-img-b">
-        <div class="illus">
-          <svg viewBox="0 0 200 140" width="100%" height="100%">
-            <path d="M0 90 Q50 70 100 90 T200 90 V140 H0 Z" fill="#0a4a52"/>
-            <path d="M0 105 Q50 90 100 105 T200 105 V140 H0 Z" fill="#0e5f6f"/>
-            <rect x="30" y="55" width="26" height="30" fill="#c9985f"/>
-            <polygon points="43,38 20,55 66,55" fill="#8a6947"/>
-            <rect x="120" y="60" width="20" height="26" fill="#c9985f"/>
-            <polygon points="130,46 110,60 150,60" fill="#8a6947"/>
-            <ellipse cx="90" cy="100" rx="26" ry="6" fill="#3a2a1a"/>
-          </svg>
-        </div>
+        <img src="images/quemsomos-2.jpg" alt="Comunidade ribeirinha AmazonPure"
+          style="width:100%; height:100%; object-fit:cover; display:block;"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="illus" style="display:none;">Coloque aqui: images/quemsomos-2.jpg</div>
       </div>
     </div>
     <div class="qs-copy reveal">
