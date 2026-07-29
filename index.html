@@ -63,7 +63,7 @@
   }
   .nav{display:flex; align-items:center; justify-content:space-between; padding:18px 0;}
   @media(max-width:640px){
-    header .wrap{padding:0 28px;}
+    header .wrap{padding-left:28px; padding-right:28px;}
     .nav{padding:calc(env(safe-area-inset-top, 0px) + 34px) 0 16px;}
   }
   .logo{display:flex; align-items:center; gap:10px; font-family:'Space Grotesk'; font-weight:700; font-size:20px;}
@@ -191,7 +191,8 @@
   .hero-cta-wrap{grid-area:cta; align-self:start;}
   @media(max-width:900px){.hero-cta-wrap{align-self:center;}}
 
-  .hero-index{font-family:'Space Grotesk'; font-size:15px; font-weight:700; color:var(--cyan-400); letter-spacing:.1em; margin-bottom:18px; display:block;}
+  .hero-index{font-family:'Space Grotesk'; font-size:15px; font-weight:700; color:var(--cyan-400); letter-spacing:.1em; margin-bottom:18px; display:block; line-height:1.3;}
+  @media(max-width:900px){.hero-index{min-height:2.6em;}}
   .hero-text-main h1{
     font-size:clamp(2.8rem, 7vw, 6rem);
     line-height:0.98; font-weight:700; color:var(--white);
@@ -200,7 +201,9 @@
   .hero-text-main p{
     margin-top:22px; font-size:16.5px; color:var(--muted); max-width:440px; line-height:1.7;
   }
-  @media(max-width:900px){.hero-text-main p{margin:22px auto 0;}}
+  @media(max-width:900px){
+    .hero-text-main p{margin:22px auto 0; min-height:5.1em;}
+  }
   .hero-cta-wrap .cta-btn{margin-top:0;}
   @media(max-width:900px){.hero-cta-wrap{margin-top:8px;}}
 
@@ -612,13 +615,13 @@ confiança para toda a população.</p>
   <div class="wrap qs-grid">
     <div class="qs-collage reveal">
       <div class="qs-img qs-img-a">
-        <img src="images/quemsomos-1.jpg" alt="Ambiente corporativo AmazonPure"
+        <img src="images/quemsomos-1.jpeg" alt="Ambiente corporativo AmazonPure"
           style="width:100%; height:100%; object-fit:cover; display:block;"
           onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
         <div class="illus" style="display:none;">Coloque aqui: images/quemsomos-1.jpg</div>
       </div>
       <div class="qs-img qs-img-b">
-        <img src="images/quemsomos-2.jpg" alt="Comunidade ribeirinha AmazonPure"
+        <img src="images/quemsomos-2.jpeg" alt="Comunidade ribeirinha AmazonPure"
           style="width:100%; height:100%; object-fit:cover; display:block;"
           onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
         <div class="illus" style="display:none;">Coloque aqui: images/quemsomos-2.jpg</div>
@@ -655,8 +658,8 @@ confiança para toda a população.</p>
             </div>
             <div class="prod-copy">
               <div class="kicker">Gusto</div>
-              <h3>Purificação inteligente para espaços de alto padrão.</h3>
-              <p>Estação de água pensada para lobbies, escritórios e ambientes corporativos que querem unir design, tecnologia e bem-estar em um só ponto de hidratação.</p>
+              <h3>Sabores personalizados, zero descartáveis.</h3>
+              <p>Modelo com seleção de aromas para refinar a experiência, reduzir estoques e simplificar o dia a dia de quem busca praticidade sem abrir mão da qualidade.</p>
               <div class="tag-row">
                 <span class="tag">Saúde</span>
                 <span class="tag">Tecnologia</span>
@@ -674,8 +677,10 @@ confiança para toda a população.</p>
             </div>
             <div class="prod-copy">
               <div class="kicker">Comunitá</div>
-              <h3>Sabores personalizados, zero descartáveis.</h3>
-              <p>Modelo com seleção de aromas para refinar a experiência, reduzir estoques e simplificar o dia a dia de quem busca praticidade sem abrir mão da qualidade.</p>
+              <h3>Água pura 24h por dia e com qualidade.</h3>
+              <p>Água pura e segura 24h por dia, com avançado
+sistema de purificação que promove mais saúde 
+e qualidade de vida.</p>
               <div class="tag-row">
                 <span class="tag">Personalização</span>
                 <span class="tag">Sustentabilidade</span>
