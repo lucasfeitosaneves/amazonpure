@@ -1,583 +1,1057 @@
 <!DOCTYPE html>
-<html lang="pt-BR" class="scroll-smooth">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Centro Veterinário Animali’S</title>
-    
-    <!-- Favicon apontando para a pasta assets local -->
-    <link rel="icon" href="assets/favicon.png" type="image/png">
-    <link rel="shortcut icon" href="assets/favicon.png" type="image/png">
-    <link rel="apple-touch-icon" href="assets/favicon.png">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Amazon Pure — Água pura para todos os momentos</title>
+<link rel="icon" type="image/favicon.png" href="images/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy-950:#061826;
+    --navy-900:#0b2439;
+    --navy-800:#0f2f4c;
+    --blue-600:#1668b8;
+    --blue-500:#2f8fd1;
+    --cyan-400:#57d6e0;
+    --lime-400:#c7ea6a;
+    --lime-300:#dcf59a;
+    --ink:#eef6fb;
+    --muted:#93b0c6;
+    --white:#ffffff;
+    --radius-lg:28px;
+    --radius-md:18px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Manrope', sans-serif;
+    background:var(--navy-950);
+    color:var(--ink);
+    overflow-x:hidden;
+  }
+  h1,h2,h3,.display{
+    font-family:'Space Grotesk', sans-serif;
+    letter-spacing:-0.02em;
+  }
+  a{color:inherit; text-decoration:none;}
+  img{max-width:100%; display:block;}
+  .wrap{max-width:1180px; margin:0 auto; padding:0 32px;}
+  @media(max-width:640px){.wrap{padding:0 20px;}}
 
-    <!-- Fontes do Google -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  /* ---------- Reveal on scroll ---------- */
+  .reveal{opacity:0; transform:translateY(28px); transition:opacity .8s ease, transform .8s ease;}
+  .reveal.in{opacity:1; transform:translateY(0);}
+  @media (prefers-reduced-motion: reduce){
+    .reveal{opacity:1; transform:none; transition:none;}
+    *{animation:none !important;}
+  }
 
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    },
-                    colors: {
-                        brand: {
-                            dark: '#6b8e6b',      /* Verde escuro da logo e botões */
-                            darker: '#557255',    /* Verde escuro para hover */
-                            light: '#eef4ee',     /* Verde muito claro do fundo do hero */
-                            footer: '#2C352D',    /* Cor escura para o rodapé */
-                        }
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        /* Estilos adicionais para garantir que as imagens sem source (antes de você adicioná-las) mantenham o layout */
-        img {
-            background-color: #f3f4f6;
-            color: #9ca3af;
-            font-size: 0.875rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            object-fit: cover;
-        }
+  /* ---------- Header ---------- */
+  header{
+    position:fixed; top:0; left:0; right:0; z-index:50;
+    background:transparent;
+    border-bottom:1px solid transparent;
+    transition:background .3s ease, backdrop-filter .3s ease, border-color .3s ease;
+  }
+  header.scrolled{
+    background:rgba(6,24,38,0.75);
+    backdrop-filter:blur(14px);
+    border-bottom-color:rgba(255,255,255,0.06);
+  }
+  .nav{display:flex; align-items:center; justify-content:space-between; padding:18px 0;}
+  @media(max-width:640px){
+    header .wrap{padding-left:28px; padding-right:28px;}
+    .nav{padding:calc(env(safe-area-inset-top, 0px) + 34px) 0 16px;}
+  }
+  .logo{display:flex; align-items:center; gap:10px; font-family:'Space Grotesk'; font-weight:700; font-size:20px;}
+  .logo .drop{width:22px; height:22px; border-radius:50% 50% 50% 4px; background:linear-gradient(135deg,var(--cyan-400),var(--blue-600)); transform:rotate(45deg);}
+  .logo b{color:var(--white);}
+  .logo span{color:var(--cyan-400); font-weight:500;}
+  .navlinks{display:flex; gap:34px; font-size:14.5px; font-weight:600; color:var(--muted);}
+  .navlinks a:hover{color:var(--white);}
+  .cta-btn{
+    display:inline-flex; align-items:center; gap:8px;
+    background:linear-gradient(135deg,var(--cyan-400),var(--blue-600));
+    color:var(--navy-950); font-weight:700; font-size:14px;
+    padding:12px 22px; border-radius:100px; white-space:nowrap;
+    box-shadow:0 8px 24px rgba(47,143,209,0.35);
+    transition:transform .25s ease, box-shadow .25s ease;
+    border:none; cursor:pointer;
+  }
+  .cta-btn:hover{transform:translateY(-2px); box-shadow:0 12px 30px rgba(47,143,209,0.5);}
+  .mobile-hide{display:flex;}
+  @media(max-width:860px){.mobile-hide{display:none;}}
 
-        /* Primeira dobra = hero + benefícios ocupando a altura toda da tela (abaixo do header de 5rem) */
-        .fold {
-            min-height: calc(100vh - 5rem);
-            min-height: calc(100svh - 5rem);
-            background-color: #c7ffda; /* mesmo verde da imagem, para emendar sem emenda visível */
-        }
-        /* Imagem na altura total da hero, colada à direita e sem cortar */
-        .hero-bg {
-            background-image: url('assets/hero-image.png');
-            background-size: auto 100%;
-            background-position: right bottom;
-            background-repeat: no-repeat;
-        }
+  /* ---------- Menu mobile (hambúrguer) ---------- */
+  .hamburger{
+    display:none; flex-direction:column; justify-content:center; gap:5px;
+    width:32px; height:32px; cursor:pointer; z-index:60;
+  }
+  .hamburger span{
+    width:100%; height:2px; background:var(--white); border-radius:2px;
+    transition:transform .3s ease, opacity .3s ease;
+  }
+  @media(max-width:860px){.hamburger{display:flex;}}
+  .hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+  .hamburger.open span:nth-child(2){opacity:0;}
+  .hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
 
-        /* No mobile, escurece a foto do hero para melhorar a leitura do texto.
-           O desktop permanece com o visual original. */
-        @media (max-width: 767px) {
-            .hero-bg::before {
-                content: "";
-                position: absolute;
-                inset: 0;
-                z-index: 0;
-                background: linear-gradient(
-                    90deg,
-                    rgba(15, 25, 18, 0.68) 0%,
-                    rgba(15, 25, 18, 0.48) 58%,
-                    rgba(15, 25, 18, 0.30) 100%
-                );
-                pointer-events: none;
-            }
+  .mobile-overlay{
+    position:fixed; inset:0; z-index:54;
+    background:rgba(4,16,28,0.6);
+    opacity:0; visibility:hidden; transition:opacity .35s ease;
+  }
+  .mobile-overlay.open{opacity:1; visibility:visible;}
 
-            .hero-bg h1 {
-                color: #ffffff;
-                text-shadow: 0 2px 12px rgba(0, 0, 0, 0.28);
-            }
+  .mobile-menu{
+    position:fixed; top:0; right:0; height:100vh; width:78%; max-width:320px; z-index:55;
+    background:rgba(6,24,38,0.98); backdrop-filter:blur(16px);
+    border-left:1px solid rgba(255,255,255,0.08);
+    box-shadow:-24px 0 60px rgba(0,0,0,0.45);
+    display:flex; flex-direction:column; gap:26px;
+    padding:110px 34px 40px;
+    transform:translateX(100%); transition:transform .4s cubic-bezier(.2,.9,.25,1);
+  }
+  .mobile-menu.open{transform:translateX(0);}
+  .mobile-menu a{font-size:18px; font-weight:700; color:var(--ink);}
+  .mobile-menu a:hover{color:var(--cyan-400);}
 
-            .hero-bg p {
-                color: #f3f7f3;
-                text-shadow: 0 1px 8px rgba(0, 0, 0, 0.30);
-            }
+  /* ---------- Hero ---------- */
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:8px;
+    font-size:13px; font-weight:700; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--lime-400); background:rgba(199,234,106,0.1);
+    padding:8px 16px; border-radius:100px; margin-bottom:22px;
+    border:1px solid rgba(199,234,106,0.25);
+  }
+  .eyebrow::before{content:''; width:7px; height:7px; border-radius:50%; background:var(--lime-400); box-shadow:0 0 0 4px rgba(199,234,106,0.2);}
 
-            .hero-bg a[href="#servicos"] {
-                color: #ffffff;
-                border-color: rgba(255, 255, 255, 0.9);
-                background: rgba(255, 255, 255, 0.08);
-            }
-        }
+  /* ================= HERO CARROSSEL (estilo Foxico) ================= */
+  .hero-carousel{
+    position:relative;
+    height:100vh; min-height:640px; max-height:920px;
+    overflow:hidden;
+    padding:0;
+  }
+  @media(max-width:900px){
+    .hero-carousel{height:auto; min-height:100vh; max-height:none; overflow:visible;}
+  }
+  .hero-slide{
+    position:absolute; inset:0;
+    display:flex; align-items:center;
+    opacity:0; visibility:hidden;
+    transition:opacity .9s ease;
+    z-index:1;
+  }
+  .hero-slide.active{opacity:1; visibility:visible; z-index:2;}
+  @media(max-width:900px){
+    .hero-slide{position:relative; inset:auto; display:none; opacity:1; visibility:visible; transition:none;}
+    .hero-slide.active{display:flex;}
+  }
+  .hero-slide.bg-a{background:linear-gradient(120deg, #0a2a44, #123253);}
+  .hero-slide.bg-b{background:linear-gradient(120deg, #06251f, #0f2f4c);}
+  .hero-slide::before{
+    content:''; position:absolute; inset:0; pointer-events:none; z-index:1;
+    background:linear-gradient(90deg, rgba(6,24,38,0.82) 0%, rgba(6,24,38,0.45) 48%, rgba(6,24,38,0.25) 100%);
+  }
+  .hero-bg-photo{
+    position:absolute; inset:0; width:100%; height:100%;
+    object-fit:cover; object-position:center; z-index:0;
+  }
+  .hero-bg-fallback{
+    position:absolute; inset:0; z-index:0;
+    display:flex; align-items:center; justify-content:center;
+    text-align:center; padding:0 40px;
+    font-family:'Space Grotesk'; font-size:13px; font-weight:600;
+    color:rgba(255,255,255,0.35); letter-spacing:.03em;
+  }
 
-        /* Carrossel: esconde a barra de rolagem */
-        .no-scrollbar { scrollbar-width: none; -ms-overflow-style: none; }
-        .no-scrollbar::-webkit-scrollbar { display: none; }
-    </style>
+  .hero-inner{position:relative; z-index:2; width:100%; display:flex; flex-direction:column; height:100%; padding:120px 0 40px;}
+  @media(max-width:900px){.hero-inner{height:auto; padding:110px 0 30px;}}
+  .hero-slide-inner{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    grid-template-areas:"text cards" "cta cards";
+    grid-template-rows:auto auto;
+    align-content:center; align-items:center;
+    gap:20px 40px; flex:1;
+  }
+  @media(max-width:900px){
+    .hero-slide-inner{
+      grid-template-columns:1fr;
+      grid-template-areas:"text" "cards" "cta";
+      grid-template-rows:auto auto auto;
+      text-align:center;
+    }
+  }
+  .hero-text-main{grid-area:text;}
+  .hero-cta-wrap{grid-area:cta; align-self:start;}
+  @media(max-width:900px){.hero-cta-wrap{align-self:center;}}
+
+  .hero-index{font-family:'Space Grotesk'; font-size:15px; font-weight:700; color:var(--cyan-400); letter-spacing:.1em; margin-bottom:18px; display:block; line-height:1.3;}
+  @media(max-width:900px){.hero-index{min-height:2.6em;}}
+  .hero-text-main h1{
+    font-size:clamp(2.8rem, 7vw, 6rem);
+    line-height:0.98; font-weight:700; color:var(--white);
+    text-transform:uppercase;
+  }
+  .hero-text-main p{
+    margin-top:22px; font-size:16.5px; color:var(--muted); max-width:440px; line-height:1.7;
+  }
+  @media(max-width:900px){
+    .hero-text-main p{margin:22px auto 0; min-height:5.1em;}
+  }
+  .hero-cta-wrap .cta-btn{margin-top:0;}
+  @media(max-width:900px){.hero-cta-wrap{margin-top:8px;}}
+
+  .hero-cards{position:relative; display:flex; align-items:center; justify-content:flex-end; height:100%; grid-area:cards;}
+  @media(max-width:900px){.hero-cards{justify-content:center; margin:8px 0;}}
+  .hero-photo-card{
+    position:relative; border-radius:22px; overflow:hidden;
+    width:480px; height:580px;
+    border:1px solid rgba(255,255,255,0.14);
+    box-shadow:0 30px 60px rgba(0,0,0,0.5);
+    opacity:0; transform:translateY(60px) scale(.9);
+    transition:opacity .8s cubic-bezier(.2,.9,.25,1.2) .15s, transform .8s cubic-bezier(.2,.9,.25,1.2) .15s;
+  }
+  @media(max-width:640px){.hero-photo-card{width:220px; height:290px;}}
+  .hero-slide.active .hero-photo-card{opacity:1; transform:translateY(0) scale(1);}
+  .hero-photo-card img{width:100%; height:100%; object-fit:cover; display:block;}
+  .hero-photo-card .photo-fallback{
+    width:100%; height:100%; display:flex; align-items:center; justify-content:center;
+    text-align:center; padding:0 22px;
+    font-family:'Space Grotesk'; font-size:12.5px; font-weight:600; color:rgba(255,255,255,0.55);
+  }
+  .hero-photo-card .bookmark{
+    position:absolute; top:14px; right:14px; width:32px; height:32px; border-radius:50%;
+    background:rgba(255,255,255,0.18); backdrop-filter:blur(6px);
+    display:flex; align-items:center; justify-content:center; color:#fff; font-size:14px;
+    z-index:2;
+  }
+  .hero-photo-card .card-label{
+    position:absolute; bottom:0; left:0; right:0; z-index:2;
+    padding:16px; font-size:13px; font-weight:700; color:#fff;
+    background:linear-gradient(0deg, rgba(0,0,0,0.55), transparent);
+  }
+
+  .hero-controls{
+    position:absolute; left:0; right:0; bottom:0; z-index:3;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:18px 0 34px;
+  }
+  @media(max-width:900px){
+    .hero-controls{position:relative; left:auto; right:auto; bottom:auto; padding:20px 0 32px;}
+  }
+  .hero-progress{display:flex; align-items:center; gap:14px; font-family:'Space Grotesk'; font-size:13px; color:var(--muted); font-weight:600;}
+  .hero-progress .current{color:var(--white); font-size:16px;}
+  .hero-progress .bar{width:120px; height:2px; background:rgba(255,255,255,0.15); border-radius:2px; overflow:hidden;}
+  .hero-progress .bar span{display:block; height:100%; width:50%; background:var(--cyan-400); transition:width .5s ease;}
+  .hero-arrows{display:flex; gap:12px;}
+  .hero-arrow{
+    width:46px; height:46px; border-radius:50%;
+    border:1px solid rgba(255,255,255,0.25); background:rgba(255,255,255,0.06);
+    color:#fff; font-size:18px; display:flex; align-items:center; justify-content:center;
+    cursor:pointer; transition:background .25s ease, transform .25s ease;
+  }
+  .hero-arrow:hover{background:rgba(87,214,224,0.2); transform:scale(1.05);}
+
+  /* ---------- Section basics ---------- */
+  section{padding:100px 0;}
+  @media(max-width:640px){section{padding:64px 0;}}
+  .section-head{max-width:640px; margin-bottom:56px;}
+  .section-head .eyebrow{margin-bottom:18px;}
+  .section-head h2{font-size:clamp(1.9rem,3.6vw,2.7rem); font-weight:700; color:var(--white); line-height:1.15;}
+  .section-head p{margin-top:16px; font-size:16.5px; color:var(--muted); line-height:1.65;}
+
+  /* ---------- Quem somos ---------- */
+  .quem-somos{background:var(--navy-900); position:relative;}
+  .qs-grid{display:grid; grid-template-columns:0.9fr 1.1fr; gap:64px; align-items:center;}
+  @media(max-width:900px){.qs-grid{grid-template-columns:1fr;}}
+  .qs-collage{position:relative; height:420px;}
+  @media(max-width:900px){.qs-collage{height:340px;}}
+  .qs-img{
+    position:absolute; border-radius:20px; overflow:hidden;
+    border:1px solid rgba(255,255,255,0.08); box-shadow:0 24px 50px rgba(0,0,0,0.4);
+  }
+  .qs-img-a{width:72%; height:64%; top:0; left:0; background:linear-gradient(160deg,#12324e,#0a2038);}
+  .qs-img-b{width:60%; height:52%; bottom:0; right:0; background:linear-gradient(160deg,#0e5f6f,#0a2038);}
+  .illus{width:100%; height:100%; display:flex; align-items:center; justify-content:center; padding:24px;}
+  .qs-copy .kicker{font-family:'Space Grotesk'; font-weight:700; font-size:14px; color:var(--cyan-400); letter-spacing:.05em; text-transform:uppercase; margin-bottom:14px;}
+  .qs-copy h2{font-size:clamp(1.8rem,3.4vw,2.4rem); color:var(--white); font-weight:700; margin-bottom:22px; line-height:1.2;}
+  .qs-copy p{color:var(--muted); font-size:16.5px; line-height:1.75; margin-bottom:16px;}
+  .qs-copy strong{color:var(--ink); font-weight:700;}
+
+  /* ---------- Produtos (carrossel) ---------- */
+  .produtos{
+    position:relative; overflow:hidden;
+    background:
+      radial-gradient(circle at 12% 15%, rgba(87,214,224,0.12), transparent 45%),
+      var(--navy-900);
+  }
+  .carousel{position:relative; max-width:760px; margin:0 auto;}
+  .carousel-viewport{overflow:hidden; border-radius:30px;}
+  .carousel-track{display:flex; transition:transform .6s cubic-bezier(.65,0,.35,1);}
+  .carousel-slide{
+    flex:0 0 100%;
+    display:grid; grid-template-columns:0.85fr 1.15fr; gap:44px; align-items:center;
+    padding:52px 48px;
+    background:linear-gradient(160deg, rgba(255,255,255,0.03), rgba(255,255,255,0));
+    border:1px solid rgba(255,255,255,0.07);
+    border-radius:30px;
+  }
+  @media(max-width:760px){.carousel-slide{grid-template-columns:1fr; text-align:center; padding:40px 26px;}}
+  .carousel-slide .impact-visual{justify-content:center;}
+  .carousel-slide .kicker{font-family:'Space Grotesk'; font-weight:700; font-size:13px; color:var(--lime-400); letter-spacing:.05em; text-transform:uppercase; margin-bottom:14px;}
+  .carousel-slide h3{font-size:clamp(1.5rem,2.6vw,2rem); color:var(--white); font-weight:700; margin-bottom:14px; line-height:1.2;}
+  .carousel-slide p{color:var(--muted); font-size:15.5px; line-height:1.7; margin-bottom:18px;}
+  .carousel-slide .tag-row{display:flex; gap:10px; flex-wrap:wrap;}
+  @media(max-width:760px){.carousel-slide .tag-row{justify-content:center;}}
+  .carousel-slide .tag{
+    font-size:12px; font-weight:700; color:var(--lime-300);
+    background:rgba(199,234,106,0.1); border:1px solid rgba(199,234,106,0.25);
+    padding:6px 14px; border-radius:100px;
+  }
+
+  /* entrance "surgindo" animation, triggered on scroll */
+  .carousel-slide .impact-visual .product-mock{
+    opacity:0; transform:translateY(50px) scale(.8) rotate(-6deg);
+    transition:opacity .75s cubic-bezier(.2,.9,.25,1.3), transform .75s cubic-bezier(.2,.9,.25,1.3);
+  }
+  .carousel-slide .prod-copy{
+    opacity:0; transform:translateY(24px);
+    transition:opacity .7s ease .15s, transform .7s ease .15s;
+  }
+  .produtos.in .carousel-slide.active .impact-visual .product-mock{
+    opacity:1; transform:translateY(0) scale(1) rotate(0deg);
+  }
+  .produtos.in .carousel-slide.active .prod-copy{
+    opacity:1; transform:translateY(0);
+  }
+  @media (prefers-reduced-motion: reduce){
+    .carousel-slide .impact-visual .product-mock, .carousel-slide .prod-copy{opacity:1; transform:none; transition:none;}
+  }
+
+  .carousel-nav{display:flex; align-items:center; justify-content:center; gap:22px; margin-top:32px;}
+  .carousel-arrow{
+    width:44px; height:44px; border-radius:50%; background:rgba(255,255,255,0.06);
+    border:1px solid rgba(255,255,255,0.15); color:var(--white); font-size:18px;
+    display:flex; align-items:center; justify-content:center; cursor:pointer;
+    transition:background .25s ease, transform .25s ease;
+  }
+  .carousel-arrow:hover{background:rgba(87,214,224,0.18); transform:scale(1.05);}
+  .carousel-dots{display:flex; gap:10px;}
+  .carousel-dot{width:9px; height:9px; border-radius:50%; background:rgba(255,255,255,0.2); cursor:pointer; transition:background .25s ease, width .25s ease;}
+  .carousel-dot.active{background:var(--cyan-400); width:26px; border-radius:6px;}
+
+  /* ---------- O que fazemos (light section) ---------- */
+  .fazemos{background:var(--ink); color:var(--navy-950);}
+  .fazemos .eyebrow{color:var(--blue-600); background:rgba(22,104,184,0.08); border-color:rgba(22,104,184,0.2);}
+  .fazemos .eyebrow::before{background:var(--blue-600); box-shadow:0 0 0 4px rgba(22,104,184,0.15);}
+  .fazemos .section-head h2{color:var(--navy-950);}
+  .fazemos .section-head p{color:#4a6178;}
+  .cards3{display:grid; grid-template-columns:repeat(3,1fr); gap:26px;}
+  @media(max-width:860px){.cards3{grid-template-columns:1fr;}}
+  .card{
+    position:relative; overflow:hidden; border-radius:22px;
+    height:440px;
+    box-shadow:0 16px 36px rgba(15,47,76,0.1);
+    transition:transform .3s ease, box-shadow .3s ease;
+  }
+  .card:hover{transform:translateY(-6px); box-shadow:0 24px 44px rgba(15,47,76,0.18);}
+  @media(max-width:860px){.card{height:360px;}}
+  .card-photo{
+    position:absolute; inset:0; z-index:0;
+    width:100%; height:100%; object-fit:cover;
+  }
+  .card-photo-fallback{
+    position:absolute; inset:0; z-index:0;
+    display:flex; align-items:center; justify-content:center; text-align:center;
+    padding:0 30px; background:linear-gradient(160deg,var(--navy-800),var(--navy-950));
+    font-family:'Space Grotesk'; font-size:13px; font-weight:600; color:rgba(255,255,255,0.4);
+  }
+  .card-overlay{
+    position:absolute; inset:0; z-index:1;
+    background:linear-gradient(180deg, rgba(6,24,38,0.1) 0%, rgba(6,24,38,0.35) 45%, rgba(6,24,38,0.9) 100%);
+  }
+  .card-body{position:absolute; left:0; right:0; bottom:0; z-index:2; padding:26px 26px 30px;}
+  .card-body .num{font-family:'Space Grotesk'; font-size:13px; font-weight:700; color:var(--cyan-400); margin-bottom:10px;}
+  .card-body h3{font-size:20px; font-weight:700; color:#ffffff; margin-bottom:10px;}
+  .card-body p{font-size:14.5px; color:rgba(255,255,255,0.78); line-height:1.6;}
+
+  /* ---------- Propósito (river) ---------- */
+  .proposito{background:var(--navy-950);}
+  .river-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:22px;}
+  @media(max-width:860px){.river-grid{grid-template-columns:1fr;}}
+  .river-card{border-radius:20px; overflow:hidden; border:1px solid rgba(255,255,255,0.08);}
+  .river-visual{height:200px; display:flex; align-items:center; justify-content:center;}
+  .river-caption{padding:18px 20px 22px; background:var(--navy-900);}
+  .river-caption h4{font-size:16px; font-weight:700; color:var(--white);}
+
+  /* ---------- Impact split sections ---------- */
+  .impact{background:linear-gradient(180deg,var(--navy-900),var(--navy-950));}
+  .impact-grid{display:grid; grid-template-columns:1fr 0.85fr; gap:60px; align-items:center;}
+  @media(max-width:900px){.impact-grid{grid-template-columns:1fr;}}
+  .impact-grid.reverse .impact-copy{order:2;} 
+  .impact-grid.reverse .impact-visual{order:1;}
+  @media(max-width:900px){.impact-grid.reverse .impact-copy, .impact-grid.reverse .impact-visual{order:0;}}
+  .impact-copy .kicker{font-family:'Space Grotesk'; font-weight:700; font-size:13px; color:var(--lime-400); letter-spacing:.05em; text-transform:uppercase; margin-bottom:16px;}
+  .impact-copy h2{font-size:clamp(1.7rem,3vw,2.3rem); color:var(--white); font-weight:700; margin-bottom:26px;}
+  .impact-list{display:flex; flex-direction:column; gap:16px;}
+  .impact-list li{list-style:none; display:flex; align-items:center; gap:14px; font-size:17px; font-weight:700; color:var(--lime-300);}
+  .impact-list li .check{
+    width:26px; height:26px; border-radius:50%; flex:none;
+    background:rgba(199,234,106,0.12); border:1px solid rgba(199,234,106,0.3);
+    display:flex; align-items:center; justify-content:center;
+  }
+  .impact-visual{display:flex; justify-content:center;}
+
+  /* Product mock generic */
+  .product-mock{
+    width:230px; padding:26px 20px 32px; border-radius:26px;
+    position:relative;
+    box-shadow:0 30px 70px rgba(0,0,0,0.5);
+  }
+  .product-mock.blue{background:linear-gradient(165deg,#1c7fc7,#0b3d63);}
+  .product-mock.steel{background:linear-gradient(165deg,#3a4a58,#161f28); border:1px solid rgba(255,255,255,0.08);}
+  .product-mock .p-brand{font-size:11px; font-weight:700; color:rgba(255,255,255,0.85); text-align:center; letter-spacing:.04em; margin-bottom:16px;}
+  .product-mock .p-screen{background:rgba(0,0,0,0.25); border-radius:14px; padding:22px 12px; text-align:center; border:1px solid rgba(255,255,255,0.15);}
+  .product-mock .p-drop{width:36px; height:36px; margin:0 auto 12px; border-radius:50% 50% 50% 4px; background:var(--white); opacity:.9; transform:rotate(45deg);}
+  .product-mock .p-screen p{font-size:11px; font-weight:700; color:#fff; line-height:1.5;}
+  .product-mock .p-slot{margin-top:18px; height:70px; border-radius:10px; background:rgba(255,255,255,0.08); display:flex; align-items:center; justify-content:center;}
+  .product-mock .p-slot .bottle{width:16px; height:46px; border-radius:8px 8px 4px 4px; background:rgba(255,255,255,0.5);}
+
+  /* ---------- Social proof ---------- */
+  .proof{background:var(--ink); color:var(--navy-950); text-align:center;}
+  .proof h2{font-size:clamp(1.6rem,3vw,2.2rem); font-weight:700; margin-bottom:48px;}
+  .logo-strip{display:flex; flex-wrap:wrap; justify-content:center; align-items:center; gap:20px;}
+  .logo-pill{
+    display:flex; align-items:center; gap:10px;
+    padding:14px 24px; border-radius:100px; background:#fff;
+    border:1px solid #e4ecf2; font-weight:800; font-size:14px; color:#1c3a54;
+    box-shadow:0 8px 18px rgba(15,47,76,0.06);
+  }
+  .logo-pill .swatch{width:10px; height:10px; border-radius:50%;}
+
+  /* Carrossel infinito de logos de clientes (arrastável com o mouse) */
+  .logo-marquee{
+    position:relative; overflow:hidden; width:100%;
+    cursor:grab; user-select:none;
+  }
+  .logo-marquee:active{cursor:grabbing;}
+  .logo-track{
+    display:flex; align-items:center; gap:20px; width:max-content;
+    will-change:transform;
+  }
+  .logo-set{display:flex; align-items:center; gap:20px;}
+  .logo-pill{transition:transform .3s ease, box-shadow .3s ease;}
+  .logo-pill:hover{transform:translateY(-3px) scale(1.04); box-shadow:0 14px 26px rgba(15,47,76,0.14);}
+  .logo-pill img{height:46px; width:auto; display:block; max-width:170px; object-fit:contain; pointer-events:none;}
+
+  /* ---------- Final CTA ---------- */
+  .final-cta{
+    background:
+      radial-gradient(circle at 85% 20%, rgba(87,214,224,0.15), transparent 50%),
+      linear-gradient(180deg,var(--navy-950),#04101c);
+    position:relative; overflow:hidden;
+  }
+  .fc-grid{display:grid; grid-template-columns:1.1fr 0.9fr; gap:50px; align-items:center;}
+  @media(max-width:900px){.fc-grid{grid-template-columns:1fr; text-align:center;}}
+  .fc-grid h2{font-size:clamp(2rem,4vw,3rem); color:var(--white); font-weight:700; line-height:1.1; margin-bottom:22px;}
+  .fc-grid p{color:var(--muted); font-size:16.5px; max-width:440px; margin-bottom:32px;}
+  @media(max-width:900px){.fc-grid p{margin-left:auto; margin-right:auto;}}
+
+  .contact-email-row{margin-bottom:24px;}
+  .contact-email{
+    display:inline-flex; align-items:center; gap:14px;
+    color:var(--white); font-weight:700; font-size:17px;
+  }
+  .contact-email .icon-circle{
+    width:44px; height:44px; border-radius:50%; flex:none;
+    background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.18);
+    display:flex; align-items:center; justify-content:center; color:var(--cyan-400);
+    transition:background .25s ease, transform .25s ease, border-color .25s ease;
+  }
+  .contact-email:hover .icon-circle{background:rgba(87,214,224,0.18); transform:translateY(-2px); border-color:rgba(87,214,224,0.45);}
+  .contact-email .icon-circle svg{width:20px; height:20px;}
+
+  .social-row{display:flex; align-items:center; gap:14px; margin-bottom:30px;}
+  @media(max-width:900px){.social-row{justify-content:center;}}
+  .social-label{font-size:13px; font-weight:700; color:var(--muted); text-transform:uppercase; letter-spacing:.05em; margin-right:4px;}
+  .social-icon{
+    width:46px; height:46px; border-radius:50%; flex:none;
+    border:1px solid rgba(255,255,255,0.2); background:rgba(255,255,255,0.05);
+    display:flex; align-items:center; justify-content:center; color:var(--white);
+    transition:background .25s ease, transform .25s ease, border-color .25s ease;
+  }
+  .social-icon:hover{background:rgba(87,214,224,0.18); transform:translateY(-2px); border-color:rgba(87,214,224,0.45);}
+  .social-icon svg{width:20px; height:20px;}
+
+  .network{position:relative; height:340px; border-radius:26px; overflow:hidden; background:linear-gradient(165deg,#0d2c48,#061826); border:1px solid rgba(255,255,255,0.08);}
+  .network svg{width:100%; height:100%;}
+
+  /* ---------- Footer ---------- */
+  footer{background:#04101c; padding:36px 0; border-top:1px solid rgba(255,255,255,0.06);}
+  .foot-row{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;}
+  @media(max-width:640px){
+    .foot-row{flex-direction:column; text-align:center; gap:18px;}
+  }
+  .foot-links{display:flex; gap:26px; font-size:13.5px; color:var(--muted); flex-wrap:wrap;}
+  .foot-links a:hover{color:var(--white);}
+  .foot-brand{font-size:13px; color:var(--muted);}
+</style>
 </head>
-<body class="font-sans text-gray-800 antialiased bg-white">
+<body>
 
-    <header class="sticky top-0 z-50 bg-white shadow-sm">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-20">
-                <!-- Logo -->
-                <div class="flex-shrink-0 flex items-center">
-                    <a href="#">
-                        <img class="h-12 w-auto" src="assets/logo.png" alt="Animali'S Centro de Saúde Logo">
-                    </a>
-                </div>
+<header>
+  <div class="wrap nav">
+    <div class="logo">
+  <a href="index.html"><img  src="images/logo.png" alt="AmazonPure" style="height:28px; width:auto;">
+</div>
+    <nav class="navlinks mobile-hide">
+      <a href="#quemsomos">Quem somos</a>
+      <a href="#produtos">Produtos</a>
+      <a href="#fazemos">O que fazemos</a>
+      <a href="#clientes">Clientes</a>
+    </nav>
+    <div class="mobile-hide">
+      <a href="#contato" class="cta-btn">Contato</a>
+    </div>
+    <div class="hamburger" id="hamburgerBtn" role="button" aria-label="Abrir menu">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
 
-                <!-- Navegação Desktop -->
-                <nav class="hidden md:flex space-x-8">
-                    <a href="#inicio" class="text-gray-600 hover:text-brand-dark font-medium transition-colors">Início</a>
-                    <a href="#sobre" class="text-gray-600 hover:text-brand-dark font-medium transition-colors">Sobre Nós</a>
-                    <a href="#servicos" class="text-gray-600 hover:text-brand-dark font-medium transition-colors">Serviços</a>
-                    <a href="#avaliacoes" class="text-gray-600 hover:text-brand-dark font-medium transition-colors">Depoimentos</a>
-                    <a href="#contato" class="text-gray-600 hover:text-brand-dark font-medium transition-colors">Contato</a>
-                </nav>
+<div class="mobile-overlay" id="mobileOverlay"></div>
+<nav class="mobile-menu" id="mobileMenu">
+  <a href="#quemsomos">Quem somos</a>
+  <a href="#produtos">Produtos</a>
+  <a href="#fazemos">O que fazemos</a>
+  <a href="#clientes">Clientes</a>
+  <a href="#contato" class="cta-btn" style="justify-content:center; margin-top:6px;">Contato</a>
+</nav>
 
-                <!-- Botão Agendar Desktop -->
-                <div class="hidden md:flex items-center">
-                    <a href="#contato" class="bg-brand-dark hover:bg-brand-darker text-white px-6 py-2 rounded-full font-medium transition-colors shadow-md">
-                        Agendar Consulta
-                    </a>
-                </div>
+<section class="hero-carousel" id="heroCarousel">
 
-                <!-- Botão Menu Mobile -->
-                <div class="flex items-center md:hidden">
-                    <button type="button" id="mobile-menu-button" class="text-gray-600 hover:text-gray-900 focus:outline-none p-2">
-                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
-                        </svg>
-                    </button>
-                </div>
-            </div>
+  <div class="hero-slide bg-a active" data-hero="0">
+    <!-- IMAGEM DE FUNDO DO SLIDE 1 — troque o src abaixo pela sua foto (ambiente/produto em contexto) -->
+    <img class="hero-bg-photo" src="images/background-1.jpg" alt="Ambiente Purificatta"
+      onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+    <div class="hero-bg-fallback" style="display:none;">Coloque aqui: imagens/fundo-purificatta.jpg</div>
+
+    <div class="wrap hero-inner">
+      <div class="hero-slide-inner">
+        <div class="hero-text-main">
+          <span class="hero-index">PARA SEU AMBIENTE PREMIUM</span>
+          <h1>GUSTO</h1>
+          <p>Soluções inteligentes para ambientes que exigem excelência.</p>
         </div>
-
-        <!-- Menu Mobile (Oculto por padrão) -->
-        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100">
-            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                <a href="#inicio" class="block px-3 py-2 text-gray-700 hover:bg-brand-light hover:text-brand-dark rounded-md font-medium">Início</a>
-                <a href="#sobre" class="block px-3 py-2 text-gray-700 hover:bg-brand-light hover:text-brand-dark rounded-md font-medium">Sobre Nós</a>
-                <a href="#servicos" class="block px-3 py-2 text-gray-700 hover:bg-brand-light hover:text-brand-dark rounded-md font-medium">Serviços</a>
-                <a href="#avaliacoes" class="block px-3 py-2 text-gray-700 hover:bg-brand-light hover:text-brand-dark rounded-md font-medium">Depoimentos</a>
-                <a href="#contato" class="block px-3 py-2 text-gray-700 hover:bg-brand-light hover:text-brand-dark rounded-md font-medium">Contato</a>
-                <a href="#contato" class="block w-full text-center mt-4 bg-brand-dark hover:bg-brand-darker text-white px-6 py-2 rounded-full font-medium transition-colors">
-                    Agendar Consulta
-                </a>
-            </div>
+        <div class="hero-cards">
+          <div class="hero-photo-card">
+            <!-- IMAGEM DO PRODUTO 1 — troque o src abaixo pela foto do Purificatta -->
+            <img src="images/gusto.jpeg" alt="Purificatta"
+              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="photo-fallback" style="display:none;">Coloque aqui: imagens/produto-purificatta.jpg</div>
+            
+            <div class="card-label"></div>
+          </div>
         </div>
-    </header>
-
-    <div class="fold flex flex-col">
-    <section id="inicio" class="hero-bg relative overflow-hidden flex-1 flex items-center">
-        <div class="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col md:flex-row items-center py-16 md:py-24">
-                
-                <!-- Conteúdo de Texto -->
-                <div class="w-full md:w-1/2 z-10 pr-0 md:pr-10">
-                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight mb-6">
-                        O cuidado e o amor que <br class="hidden lg:block"/>
-                        seu pet merece, <br class="hidden lg:block"/>
-                        24 horas por dia.
-                    </h1>
-                    <p class="text-lg text-gray-700 mb-8 max-w-lg">
-                        Centro de Saúde Veterinário completo com atendimento especializado, exames e carinho de sobra para o bem-estar do seu melhor amigo.
-                    </p>
-                    
-                    <div class="flex flex-col sm:flex-row gap-4">
-                        <a href="https://wa.me/message/DSNFZIQFOZQTL1" target="_blank" class="flex items-center justify-center bg-brand-dark hover:bg-brand-darker text-white px-8 py-3 rounded-full font-medium transition-colors shadow-lg">
-                            <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
-                            Falar no WhatsApp
-                        </a>
-                        <a href="#servicos" class="flex items-center justify-center border-2 border-brand-dark text-brand-dark hover:bg-brand-dark hover:text-white px-8 py-3 rounded-full font-medium transition-colors">
-                            Conhecer Serviços
-                        </a>
-                    </div>
-                </div>
-
-            </div>
+        <div class="hero-cta-wrap">
+          <a href="https://wa.me/559281071200" target="_blank" class="cta-btn">Solicite seu orçamento <span>→</span></a>
         </div>
-    </section>
+      </div>
+    </div>
+  </div>
 
-    <section class="relative py-8 overflow-hidden bg-brand-light">
-        <!-- Decoração de fundo (pontinhos) -->
-        <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMiIgY3k9IjIiIHI9IjIiIGZpbGw9IiM2YjhlNmIiIGZpbGwtb3BhY2l0eT0iMC4yIi8+PC9zdmc+')] opacity-50 pointer-events-none"></div>
-        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
-                <!-- Benefício 1 -->
-                <div class="flex items-center justify-center bg-white/60 p-4 rounded-xl shadow-sm">
-                    <div class="w-10 h-10 bg-brand-light rounded-full flex items-center justify-center mr-3 text-brand-dark">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                    </div>
-                    <span class="font-semibold text-gray-800 text-sm sm:text-base">Atendimento 24h</span>
-                </div>
-                <!-- Benefício 2 -->
-                <div class="flex items-center justify-center bg-white/60 p-4 rounded-xl shadow-sm">
-                    <div class="w-10 h-10 bg-brand-light rounded-full flex items-center justify-center mr-3 text-brand-dark">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
-                    </div>
-                    <span class="font-semibold text-gray-800 text-sm sm:text-base">Equipe Especializada</span>
-                </div>
-                <!-- Benefício 3 -->
-                <div class="flex items-center justify-center bg-white/60 p-4 rounded-xl shadow-sm">
-                    <div class="w-10 h-10 bg-brand-light rounded-full flex items-center justify-center mr-3 text-brand-dark">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
-                    </div>
-                    <span class="font-semibold text-gray-800 text-sm sm:text-base">Estrutura Completa</span>
-                </div>
-                <!-- Benefício 4 -->
-                <div class="flex items-center justify-center bg-white/60 p-4 rounded-xl shadow-sm">
-                    <div class="w-10 h-10 bg-brand-light rounded-full flex items-center justify-center mr-3 text-brand-dark">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
-                    </div>
-                    <span class="font-semibold text-gray-800 text-sm sm:text-base">Amor e Carinho</span>
-                </div>
-            </div>
+  <div class="hero-slide bg-b" data-hero="1">
+    <!-- IMAGEM DE FUNDO DO SLIDE 2 — troque o src abaixo pela sua foto -->
+    <img class="hero-bg-photo" src="images/background-2.jpg" alt="Ambiente Gusto"
+      onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+    <div class="hero-bg-fallback" style="display:none;">Coloque aqui: imagens/fundo-gusto.jpg</div>
+
+    <div class="wrap hero-inner">
+      <div class="hero-slide-inner">
+        <div class="hero-text-main">
+          <span class="hero-index">ÁGUA DE QUALIDADE PARA QUEM MERECE</span>
+          <h1>Comunitá</h1>
+          <p>A Comunitá oferece água purificada disponível a 
+qualquer hora, promovendo saúde, comodidade e 
+confiança para toda a população.</p>
         </div>
-    </section>
+        <div class="hero-cards">
+          <div class="hero-photo-card">
+            <!-- IMAGEM DO PRODUTO 2 — troque o src abaixo pela foto do Gusto -->
+            <img src="images/comunita.jpeg" alt="Gusto"
+              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="photo-fallback" style="display:none;">Coloque aqui: imagens/produto-gusto.jpg</div>
+            
+            <div class="card-label"></div>
+          </div>
+        </div>
+        <div class="hero-cta-wrap">
+          <a href="https://wa.me/559281071200" target="_blank" class="cta-btn">Solicite seu orçamento <span>→</span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap hero-controls">
+    <div class="hero-progress">
+      <span class="current" id="heroCurrent">01</span>
+      <div class="bar"><span id="heroBar"></span></div>
+      <span id="heroTotal">02</span>
+    </div>
+    <div class="hero-arrows">
+      <div class="hero-arrow" id="heroPrev" role="button" aria-label="Slide anterior">‹</div>
+      <div class="hero-arrow" id="heroNext" role="button" aria-label="Próximo slide">›</div>
+    </div>
+  </div>
+</section>
+
+<section class="quem-somos" id="quemsomos">
+  <div class="wrap qs-grid">
+    <div class="qs-collage reveal">
+      <div class="qs-img qs-img-a">
+        <img src="images/quemsomos-1.jpeg" alt="Ambiente corporativo AmazonPure"
+          style="width:100%; height:100%; object-fit:cover; display:block;"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="illus" style="display:none;">Coloque aqui: images/quemsomos-1.jpg</div>
+      </div>
+      <div class="qs-img qs-img-b">
+        <img src="images/quemsomos-2.jpeg" alt="Comunidade ribeirinha AmazonPure"
+          style="width:100%; height:100%; object-fit:cover; display:block;"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="illus" style="display:none;">Coloque aqui: images/quemsomos-2.jpg</div>
+      </div>
+    </div>
+    <div class="qs-copy reveal">
+      <div class="kicker">Quem somos</div>
+      <h2>Amazon Pure</h2>
+      <p>Estamos nos ambientes mais sofisticados — e também onde a água ainda é um desafio.</p>
+      <p>A AmazonPure leva soluções de hidratação para empresas que <strong>valorizam excelência</strong> e para comunidades ribeirinhas que precisam de <strong>acesso a água de qualidade</strong>.</p>
+      <p>Porque acreditamos que a verdadeira transformação acontece quando <strong>inovação, bem-estar e impacto social</strong> caminham juntos.</p>
+    </div>
+  </div>
+</section>
+
+<section class="produtos" id="produtos">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Soluções</span>
+      <h2>Duas soluções, um mesmo propósito.</h2>
+      <p>Conheça os modelos Gusto e Comunitá feitos para elevar a experiência com água em cada ambiente.</p>
     </div>
 
-    <section id="sobre" class="scroll-mt-20 relative py-20 bg-brand-light overflow-hidden">
-        <!-- Decoração de fundo (pontinhos) -->
-        <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMiIgY3k9IjIiIHI9IjIiIGZpbGw9IiM2YjhlNmIiIGZpbGwtb3BhY2l0eT0iMC4yIi8+PC9zdmc+')] opacity-50 pointer-events-none"></div>
-        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col lg:flex-row items-center gap-12">
-                <!-- Conteúdo de Texto -->
-                <div class="w-full lg:w-1/2">
-                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">Por que escolher a Animali'S?</h2>
-                    <p class="text-lg text-gray-700 mb-8">
-                        Centro de Saúde veterinário completo com atendimento especializado, exames e carinho de sobra.
-                    </p>
-                    
-                    <ul class="space-y-4">
-                        <li class="flex items-start">
-                            <span class="flex-shrink-0 w-6 h-6 rounded-full bg-brand-dark text-white flex items-center justify-center mt-1 mr-3 text-sm">✓</span>
-                            <span class="text-gray-700 text-lg">Consultas 24h para animais de companhia e silvestres</span>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="flex-shrink-0 w-6 h-6 rounded-full bg-brand-dark text-white flex items-center justify-center mt-1 mr-3 text-sm">✓</span>
-                            <span class="text-gray-700 text-lg">Especialidades e exames veterinários no mesmo local</span>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="flex-shrink-0 w-6 h-6 rounded-full bg-brand-dark text-white flex items-center justify-center mt-1 mr-3 text-sm">✓</span>
-                            <span class="text-gray-700 text-lg">Internação segura e monitorada pelo veterinário</span>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="flex-shrink-0 w-6 h-6 rounded-full bg-brand-dark text-white flex items-center justify-center mt-1 mr-3 text-sm">✓</span>
-                            <span class="text-gray-700 text-lg">Vacinação em dia para uma vida longa e saudável</span>
-                        </li>
-                    </ul>
-                </div>
+    <div class="carousel">
+      <div class="carousel-viewport">
+        <div class="carousel-track" id="carouselTrack">
 
-                <!-- Imagem -->
-                <div class="w-full lg:w-1/2">
-                    <div class="flex items-center justify-center">
-                        <!-- Vídeo vertical da empresa (coloque o arquivo em assets/empresa.mp4) -->
-                        <video class="h-[460px] sm:h-[520px] lg:h-[560px] aspect-[9/16] object-cover rounded-2xl shadow-2xl bg-black"
-                               autoplay muted loop playsinline controls preload="metadata">
-                            <source src="assets/empresa.mp4" type="video/mp4">
-                            <source src="assets/empresa.webm" type="video/webm">
-                            Seu navegador não suporta vídeos.
-                        </video>
-                    </div>
-                </div>
+          <div class="carousel-slide active" data-slide="0">
+            <div class="impact-visual">
+              <div class="product-mock blue" style="padding:0; overflow:hidden;">
+  <img src="images/gusto.jpeg" alt="Purificatta"
+    style="width:100%; height:100%; object-fit:cover; display:block;">
+</div>
             </div>
+            <div class="prod-copy">
+              <div class="kicker">Gusto</div>
+              <h3>Sabores personalizados, zero descartáveis.</h3>
+              <p>Modelo com seleção de aromas para refinar a experiência, reduzir estoques e simplificar o dia a dia de quem busca praticidade sem abrir mão da qualidade.</p>
+              <div class="tag-row">
+                <span class="tag">Saúde</span>
+                <span class="tag">Tecnologia</span>
+                <span class="tag">Design premium</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="carousel-slide" data-slide="1">
+            <div class="impact-visual">
+              <div class="product-mock blue" style="padding:0; overflow:hidden;">
+  <img src="images/comunita.jpeg" alt="Purificatta"
+    style="width:100%; height:100%; object-fit:cover; display:block;">
+</div>
+            </div>
+            <div class="prod-copy">
+              <div class="kicker">Comunitá</div>
+              <h3>Água pura 24h por dia e com qualidade.</h3>
+              <p>Água pura e segura 24h por dia, com avançado
+sistema de purificação que promove mais saúde 
+e qualidade de vida.</p>
+              <div class="tag-row">
+                <span class="tag">Personalização</span>
+                <span class="tag">Sustentabilidade</span>
+                <span class="tag">Praticidade</span>
+              </div>
+            </div>
+          </div>
+
         </div>
-    </section>
+      </div>
 
-    <section id="servicos" class="scroll-mt-20 py-20 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-900">Nossos Serviços</h2>
-                <div class="mt-2 w-24 h-1 bg-brand-dark mx-auto rounded-full"></div>
-            </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                <!-- Card Serviço 1 -->
-                <div class="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100 hover:shadow-xl transition-shadow group">
-                    <div class="h-48 overflow-hidden bg-gray-100">
-                        <img src="assets/servico-consultas.jpg" alt="Consultas 24h" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
-                    </div>
-                    <div class="p-6 text-center bg-white relative z-10 -mt-4 mx-4 rounded-xl shadow-sm border border-gray-50">
-                        <h3 class="text-xl font-bold text-gray-900">Consultas 24h</h3>
-                    </div>
-                </div>
-
-                <!-- Card Serviço 2 -->
-                <div class="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100 hover:shadow-xl transition-shadow group">
-                    <div class="h-48 overflow-hidden bg-brand-dark">
-                        <img src="assets/servico-especialidades.jpg" alt="Especialidades Veterinárias" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
-                    </div>
-                    <div class="p-6 text-center bg-white relative z-10 -mt-4 mx-4 rounded-xl shadow-sm border border-gray-50">
-                        <h3 class="text-xl font-bold text-gray-900">Especialidades</h3>
-                    </div>
-                </div>
-
-                <!-- Card Serviço 3 -->
-                <div class="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100 hover:shadow-xl transition-shadow group">
-                    <div class="h-48 overflow-hidden bg-gray-100">
-                        <img src="assets/servico-internacao.jpg" alt="Internação para Pets" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
-                    </div>
-                    <div class="p-6 text-center bg-white relative z-10 -mt-4 mx-4 rounded-xl shadow-sm border border-gray-50">
-                        <h3 class="text-xl font-bold text-gray-900">Internação</h3>
-                    </div>
-                </div>
-
-                <!-- Card Serviço 4 -->
-                <div class="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100 hover:shadow-xl transition-shadow group">
-                    <div class="h-48 overflow-hidden bg-brand-light">
-                        <img src="assets/servico-vacinacao.jpg" alt="Vacinação Animal" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
-                    </div>
-                    <div class="p-6 text-center bg-white relative z-10 -mt-4 mx-4 rounded-xl shadow-sm border border-gray-50">
-                        <h3 class="text-xl font-bold text-gray-900">Vacinação</h3>
-                    </div>
-                </div>
-            </div>
+      <div class="carousel-nav">
+        <div class="carousel-arrow" id="carouselPrev" role="button" aria-label="Produto anterior">‹</div>
+        <div class="carousel-dots" id="carouselDots">
+          <div class="carousel-dot active" data-dot="0"></div>
+          <div class="carousel-dot" data-dot="1"></div>
         </div>
-    </section>
+        <div class="carousel-arrow" id="carouselNext" role="button" aria-label="Próximo produto">›</div>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <section id="avaliacoes" class="scroll-mt-20 py-20 bg-brand-light overflow-hidden">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-900">O que dizem os tutores</h2>
-                <div class="mt-2 w-24 h-1 bg-brand-dark mx-auto rounded-full"></div>
-                <p class="mt-4 text-gray-600">Avaliações 5 estrelas de quem confia na Animali'S</p>
-            </div>
-
-            <!-- Carrossel de avaliações (rola sozinho, em loop infinito; pausa ao passar o mouse) -->
-            <div id="reviews-viewport" class="overflow-hidden py-4 -my-4">
-                <div id="reviews-track" class="flex gap-6 will-change-transform"></div>
-            </div>
-
-            <div class="text-center mt-10">
-                <a href="https://share.google/OtYfA62xwQxs2jPU1" target="_blank" rel="noopener" class="inline-flex items-center border-2 border-brand-dark text-brand-dark hover:bg-brand-dark hover:text-white px-8 py-3 rounded-full font-medium transition-colors">
-                    Ver todas as avaliações no Google
-                </a>
-            </div>
+<section class="fazemos" id="fazemos">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">O que fazemos</span>
+      <h2>Três formas de transformar a experiência com água.</h2>
+    </div>
+    <div class="cards3">
+      <div class="card reveal">
+        <img class="card-photo" src="images/marca.jpeg" alt="Elevamos a percepção da sua marca"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="card-photo-fallback" style="display:none;">Coloque aqui: images/fazemos-1.jpg</div>
+        <div class="card-overlay"></div>
+        <div class="card-body">
+          <div class="num">01</div>
+          <h3>Elevamos a percepção da sua marca</h3>
+          <p>Estações de água com design premium que comunicam cuidado e sofisticação em cada ambiente.</p>
         </div>
-    </section>
-
-    <!-- Carrossel de imagens (assets/1.jpg até assets/7.jpg) -->
-    <section id="galeria" class="scroll-mt-20 py-20 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-900">Conheça a Animali'S</h2>
-                <div class="mt-2 w-24 h-1 bg-brand-dark mx-auto rounded-full"></div>
-            </div>
-
-            <!-- Faixa que rola continuamente (imagens quadradas de feed do Instagram): 2 no mobile, 3 no tablet, 4 no desktop -->
-            <div id="carousel" class="overflow-hidden py-6 -my-6">
-                <div id="carousel-track" class="flex gap-6 will-change-transform">
-                    <div class="shrink-0 w-[calc((100%-24px)/2)] md:w-[calc((100%-48px)/3)] lg:w-[calc((100%-72px)/4)] rounded-2xl overflow-hidden shadow-lg">
-                        <img src="assets/1.jpg" alt="Foto 1 da Animali'S" class="w-full aspect-square object-cover">
-                    </div>
-                    <div class="shrink-0 w-[calc((100%-24px)/2)] md:w-[calc((100%-48px)/3)] lg:w-[calc((100%-72px)/4)] rounded-2xl overflow-hidden shadow-lg">
-                        <img src="assets/2.jpg" alt="Foto 2 da Animali'S" class="w-full aspect-square object-cover">
-                    </div>
-                    <div class="shrink-0 w-[calc((100%-24px)/2)] md:w-[calc((100%-48px)/3)] lg:w-[calc((100%-72px)/4)] rounded-2xl overflow-hidden shadow-lg">
-                        <img src="assets/3.jpg" alt="Foto 3 da Animali'S" class="w-full aspect-square object-cover">
-                    </div>
-                    <div class="shrink-0 w-[calc((100%-24px)/2)] md:w-[calc((100%-48px)/3)] lg:w-[calc((100%-72px)/4)] rounded-2xl overflow-hidden shadow-lg">
-                        <img src="assets/4.jpg" alt="Foto 4 da Animali'S" class="w-full aspect-square object-cover">
-                    </div>
-                    <div class="shrink-0 w-[calc((100%-24px)/2)] md:w-[calc((100%-48px)/3)] lg:w-[calc((100%-72px)/4)] rounded-2xl overflow-hidden shadow-lg">
-                        <img src="assets/5.jpg" alt="Foto 5 da Animali'S" class="w-full aspect-square object-cover">
-                    </div>
-                    <div class="shrink-0 w-[calc((100%-24px)/2)] md:w-[calc((100%-48px)/3)] lg:w-[calc((100%-72px)/4)] rounded-2xl overflow-hidden shadow-lg">
-                        <img src="assets/6.jpg" alt="Foto 6 da Animali'S" class="w-full aspect-square object-cover">
-                    </div>
-                    <div class="shrink-0 w-[calc((100%-24px)/2)] md:w-[calc((100%-48px)/3)] lg:w-[calc((100%-72px)/4)] rounded-2xl overflow-hidden shadow-lg">
-                        <img src="assets/7.jpg" alt="Foto 7 da Animali'S" class="w-full aspect-square object-cover">
-                    </div>
-                </div>
-            </div>
+      </div>
+      <div class="card reveal">
+        <img class="card-photo" src="images/pessoas.jpeg" alt="Conectamos pessoas"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="card-photo-fallback" style="display:none;">Coloque aqui: images/fazemos-2.jpg</div>
+        <div class="card-overlay"></div>
+        <div class="card-body">
+          <div class="num">02</div>
+          <h3>Conectamos pessoas</h3>
+          <p>Momentos de hidratação que aproximam equipes, clientes e visitantes em espaços compartilhados.</p>
         </div>
-    </section>
-
-    <section id="contato" class="scroll-mt-20 py-20 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-900">Fale Conosco</h2>
-                <div class="mt-2 w-24 h-1 bg-brand-dark mx-auto rounded-full"></div>
-            </div>
-
-            <div class="flex flex-col lg:flex-row bg-white rounded-3xl shadow-xl overflow-hidden border border-gray-100">
-                <!-- Mapa -->
-                <div class="w-full lg:w-1/2 min-h-[320px] lg:min-h-[420px]">
-                    <iframe
-                        src="https://www.google.com/maps?q=Avenida%20Jornalista%20Umberto%20Calderaro%20Filho%2C%201587%2C%20Adrian%C3%B3polis%2C%20Manaus%20-%20AM&output=embed"
-                        title="Mapa de localização da Animali'S"
-                        class="w-full h-full min-h-[320px] lg:min-h-[420px] border-0"
-                        style="border:0;"
-                        allowfullscreen
-                        loading="lazy"
-                        referrerpolicy="no-referrer-when-downgrade"></iframe>
-                </div>
-
-                <!-- Informações de contato -->
-                <div class="w-full lg:w-1/2 bg-gray-50 p-8 lg:p-12 flex flex-col justify-center space-y-6">
-                    <div class="flex items-start">
-                            <svg class="w-6 h-6 text-brand-dark mr-4 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                            <p class="text-gray-700">Avenida Jornalista Umberto Calderaro Filho, 1587<br>Adrianópolis, Manaus - AM</p>
-                        </div>
-                        <div class="flex items-center">
-                            <svg class="w-6 h-6 text-brand-dark mr-4 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
-                            <a href="https://wa.me/message/DSNFZIQFOZQTL1" target="_blank" rel="noopener" class="text-gray-700 hover:text-brand-dark">Falar no WhatsApp</a>
-                        </div>
-                        <div class="flex items-center">
-                            <svg class="w-6 h-6 text-brand-dark mr-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
-                            <p class="text-gray-700">(92) 8525-6258</p>
-                        </div>
-                </div>
-            </div>
+      </div>
+      <div class="card reveal">
+        <img class="card-photo" src="images/bem-estar.jpeg" alt="Promovemos bem-estar"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="card-photo-fallback" style="display:none;">Coloque aqui: images/fazemos-3.jpg</div>
+        <div class="card-overlay"></div>
+        <div class="card-body">
+          <div class="num">03</div>
+          <h3>Promovemos bem-estar</h3>
+          <p>Água de qualidade e sabores personalizados para incentivar hábitos mais saudáveis no dia a dia.</p>
         </div>
-    </section>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <!-- Footer -->
-    <footer class="bg-brand-footer text-gray-300 py-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center border-b border-gray-600 pb-8">
-                <!-- Coluna Logo -->
-                <div class="flex justify-center md:justify-start">
-                    <a href="#inicio" class="inline-flex bg-white rounded-xl px-4 py-3 shadow-md">
-                        <img src="assets/logo.png" alt="Animali'S Centro de Saúde Logo" class="h-14 w-auto object-contain bg-transparent">
-                    </a>
-                </div>
-                
-                <!-- Coluna Links Rápidos -->
-                <div class="flex flex-col items-center md:items-start space-y-2">
-                    <a href="#inicio" class="hover:text-white transition-colors">Início</a>
-                    <a href="#sobre" class="hover:text-white transition-colors">Sobre Nós</a>
-                    <a href="#servicos" class="hover:text-white transition-colors">Serviços</a>
-                    <a href="#avaliacoes" class="hover:text-white transition-colors">Depoimentos</a>
-                    <a href="#contato" class="hover:text-white transition-colors">Contato</a>
-                </div>
-
-                <!-- Coluna Contatos -->
-                <div class="flex flex-col items-center md:items-start space-y-2 text-sm">
-                    <p class="flex items-center"><svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path></svg> Manaus, Brazil</p>
-                    <p class="flex items-center"><svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg> Funcionamos 24H</p>
-                    <a href="https://wa.me/message/DSNFZIQFOZQTL1" target="_blank" rel="noopener" class="inline-flex items-center justify-center mt-2 px-5 py-2 rounded-full bg-[#25D366] hover:bg-[#1ebe5b] text-white font-medium transition-colors shadow-md">
-                        <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
-                        WhatsApp
-                    </a>
-                    <a href="https://www.instagram.com/animaliscentrodesaude/" target="_blank" rel="noopener" class="inline-flex items-center justify-center px-5 py-2 rounded-full bg-gradient-to-r from-[#833ab4] via-[#fd1d1d] to-[#fcb045] hover:opacity-90 text-white font-medium transition-opacity shadow-md">
-                        <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.351-.2 6.78-2.618 6.98-6.98.059-1.281.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-                        Instagram
-                    </a>
-                </div>
-            </div>
-            
-            <div class="text-center mt-8 text-sm text-gray-500">
-                <p>&copy; 2026 Animali'S Centro de Saúde. Todos os direitos reservados.</p>
-            </div>
+<section class="proposito">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Propósito</span>
+      <h2>Unimos propósito e excelência.</h2>
+      <p>Levamos qualidade além dos centros urbanos e geramos impacto social nas comunidades ao longo do rio.</p>
+    </div>
+    <div class="river-grid">
+      <div class="river-card reveal">
+        <div class="river-visual">
+          <img src="images/inovacao.jpeg" alt="Unimos propósito e excelência"
+            style="width:100%; height:100%; object-fit:cover; display:block; object-position:center 80% ;"
+            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div style="display:none; width:100%; height:100%; align-items:center; justify-content:center; text-align:center; padding:0 20px; font-family:'Space Grotesk'; font-size:12px; font-weight:600; color:rgba(255,255,255,0.4); background:linear-gradient(160deg,#0a3a4a,#061826);">Coloque aqui: images/proposito-1.jpg</div>
         </div>
-    </footer>
+        <div class="river-caption"><h4>Unimos propósito, inovação e excelência.</h4></div>
+      </div>
+      <div class="river-card reveal">
+        <div class="river-visual">
+          <img src="images/qualidade.jpeg" alt="Levamos qualidade além dos centros urbanos"
+            style="width:100%; height:100%; object-fit:cover; display:block;"
+            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div style="display:none; width:100%; height:100%; align-items:center; justify-content:center; text-align:center; padding:0 20px; font-family:'Space Grotesk'; font-size:12px; font-weight:600; color:rgba(255,255,255,0.4); background:linear-gradient(160deg,#0e4a3a,#061826);">Coloque aqui: images/proposito-2.jpg</div>
+        </div>
+        <div class="river-caption"><h4>Levamos qualidade além dos centros urbanos.</h4></div>
+      </div>
+      <div class="river-card reveal">
+        <div class="river-visual">
+          <img src="images/impacto.jpeg" alt="Geramos impacto social"
+            style="width:100%; height:100%; object-fit:cover; display:block;"
+            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div style="display:none; width:100%; height:100%; align-items:center; justify-content:center; text-align:center; padding:0 20px; font-family:'Space Grotesk'; font-size:12px; font-weight:600; color:rgba(255,255,255,0.4); background:linear-gradient(160deg,#1a5a3a,#061826);">Coloque aqui: images/proposito-3.jpg</div>
+        </div>
+        <div class="river-caption"><h4>Geramos impacto social que transforma vidas.</h4></div>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <!-- Botão flutuante do WhatsApp (acompanha a página toda) -->
-    <a href="https://wa.me/message/DSNFZIQFOZQTL1" target="_blank" rel="noopener" aria-label="Falar no WhatsApp"
-       class="fixed bottom-5 right-5 sm:bottom-6 sm:right-6 z-50 flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-[#25D366] hover:bg-[#1ebe5b] text-white shadow-xl hover:scale-110 transition-all">
-        <span class="absolute inset-0 rounded-full bg-[#25D366] opacity-60 animate-ping"></span>
-        <svg class="relative w-8 h-8 sm:w-9 sm:h-9" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
-    </a>
+<section class="impact" id="impacto">
+  <div class="wrap impact-grid">
+    <div class="impact-copy reveal">
+      <div class="kicker">Nossos impactos</div>
+      <h2>Excelência que se sente em cada gole.</h2>
+      <ul class="impact-list">
+        <li><span class="check">✓</span> Saúde</li>
+        <li><span class="check">✓</span> Qualidade de vida</li>
+        <li><span class="check">✓</span> Tecnologia</li>
+        <li><span class="check">✓</span> Inovação</li>
+      </ul>
+    </div>
+    <iframe width="350" height="280" src="https://www.youtube.com/embed/CcKyiIGSExM?autoplay=1&mute=1&playlist=CcKyiIGSExM&loop=1&controls=0"></iframe>
+  </div>
+</section>
 
-    <script>
-        // Script para gerenciar a abertura e fechamento do menu mobile
-        const btnMenu = document.getElementById('mobile-menu-button');
-        const menuMobile = document.getElementById('mobile-menu');
+<section class="proof" id="clientes">
+  <div class="wrap">
+    <h2 class="reveal">Quem busca excelência, escolhe Amazon Pure.</h2>
+  </div>
+  <div class="logo-marquee reveal" id="logoMarquee">
+    <div class="logo-track" id="logoTrack">
+      <div class="logo-set">
+        <div class="logo-pill"><img src="images/1.png" alt="Cliente 1"></div>
+        <div class="logo-pill"><img src="images/2.png" alt="Cliente 2"></div>
+        <div class="logo-pill"><img src="images/3.png" alt="Cliente 3"></div>
+        <div class="logo-pill"><img src="images/4.png" alt="Cliente 4"></div>
+        <div class="logo-pill"><img src="images/5.png" alt="Cliente 5"></div>
+        <div class="logo-pill"><img src="images/6.png" alt="Cliente 6"></div>
+        <div class="logo-pill"><img src="images/7.png" alt="Cliente 7"></div>
 
-        btnMenu.addEventListener('click', () => {
-            menuMobile.classList.toggle('hidden');
-        });
+      </div>
+    </div>
+  </div>
+</section>
 
-        // Fechar menu ao clicar em um link
-        const menuLinks = menuMobile.querySelectorAll('a');
-        menuLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                menuMobile.classList.add('hidden');
-            });
-        });
+<section class="final-cta" id="contato">
+  <div class="wrap fc-grid">
+    <div class="reveal">
+      <span class="eyebrow">Quer saber mais?</span>
+      <h2>Vamos levar excelência e impacto para o seu ambiente.</h2>
+      <p>Fale com o time da Amazon Pure e descubra a solução ideal para a sua empresa ou comunidade.</p>
 
-        // Carrossel contínuo: rola sem pausa, em loop infinito
-        (function () {
-            const track = document.getElementById('carousel-track');
-            const originals = Array.from(track.children);
-            const n = originals.length;
-            const GAP = 24;      // gap-6
-            const SPEED = 70;    // velocidade em pixels por segundo (aumente para rolar mais rápido)
+      <div class="contact-email-row">
+        <a class="contact-email">
+          <span class="icon-circle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="5" width="18" height="14" rx="3"/>
+              <path d="M4 7l8 6 8-6"/>
+            </svg>
+          </span>
+          amazonpurepurificatta@gmail.com
+        </a>
+      </div>
 
-            // Duplica os slides para emendar o fim com o começo
-            originals.forEach(el => {
-                const c = el.cloneNode(true);
-                c.setAttribute('aria-hidden', 'true');
-                track.appendChild(c);
-            });
+      <div class="social-row">
+        <span class="social-label">Redes sociais:</span>
+        <a href="https://www.instagram.com/amazon.pure/" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Instagram da AmazonPure">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="18" height="18" rx="5"/>
+            <circle cx="12" cy="12" r="4"/>
+            <circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/>
+          </svg>
+        </a>
+        <a href="https://wa.me/559281071200" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="WhatsApp da AmazonPure">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12.04 2c-5.5 0-9.96 4.46-9.96 9.96 0 1.76.46 3.4 1.26 4.83L2 22l5.36-1.31c1.38.72 2.95 1.13 4.62 1.13h.02c5.5 0 9.96-4.46 9.96-9.96 0-2.66-1.04-5.16-2.92-7.04A9.9 9.9 0 0012.04 2zm5.83 14.05c-.25.7-1.44 1.34-1.98 1.4-.51.06-1.05.28-3.52-.73-2.97-1.22-4.86-4.24-5-4.44-.15-.2-1.2-1.6-1.2-3.05 0-1.45.76-2.16 1.03-2.46.27-.3.6-.37.8-.37.2 0 .4 0 .57.01.18.01.43-.07.68.52.25.6.85 2.06.92 2.21.07.15.12.32.02.52-.1.2-.15.32-.3.5-.15.17-.31.39-.44.52-.15.15-.3.31-.13.6.17.3.77 1.27 1.65 2.06 1.14 1.02 2.1 1.33 2.4 1.48.3.15.47.13.65-.08.17-.2.73-.85.93-1.14.2-.3.4-.24.65-.15.27.1 1.7.8 1.99.95.3.15.49.22.56.35.08.13.08.75-.17 1.45z"/>
+          </svg>
+        </a>
+      </div>
 
-            let x = 0, last = null;
-            // Largura exata de um ciclo, medida em tempo real (não depende do momento em que o CSS carrega)
-            const loopWidth = () => track.children[n].offsetLeft - track.children[0].offsetLeft;
+      <a href="https://wa.me/559281071200" target="_blank" class="cta-btn">Entre em contato</a>
+    </div>
+    <div class="network reveal">
+      <img src="images/contato.jpeg" alt="AmazonPure"
+        style="width:100%; height:100%; object-fit:cover; display:block;"
+        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+      <div style="display:none; width:100%; height:100%; align-items:center; justify-content:center; text-align:center; padding:0 30px; font-family:'Space Grotesk'; font-size:13px; font-weight:600; color:rgba(255,255,255,0.4);">
+        Coloque aqui: images/contato.jpg
+      </div>
+    </div>
+  </div>
+</section>
 
-            function frame(t) {
-                if (last === null) last = t;
-                const dt = Math.min(t - last, 50) / 1000; // evita saltos ao voltar para a aba
-                last = t;
-                const lw = loopWidth();
-                if (lw > 0) {
-                    x += SPEED * dt;
-                    if (x >= lw) x -= lw;
-                }
-                track.style.transform = 'translate3d(' + (-x) + 'px,0,0)';
-                requestAnimationFrame(frame);
-            }
-            requestAnimationFrame(frame);
-        })();
+<footer>
+  <div class="wrap foot-row">
+    <div class="logo">
+  <img src="images/logo.png" alt="AmazonPure" style="height:32px; width:auto;">
+</div>
+    <div class="foot-links">
+      <a href="https://wa.me/559281071200" target="_blank">Fale Conosco</a>
+      <!-- <a href="#">Política de privacidade</a> -->
+    </div>
+    <div class="foot-brand">© 2026 Amazon Pure. Todos os direitos reservados.</div>
+  </div>
+</footer>
 
-        // Avaliações: carrossel em loop infinito (somente 5 estrelas)
-        // Para adicionar mais avaliações, copie uma linha da lista abaixo e preencha com o texto real do Google.
-        // Todos os cards usam um ícone de pessoa no lugar da foto.
-        (function () {
-            const reviews = [
-                { nome: 'Bruna Flora',     texto: 'Excelentes no serviço, os doutores para animais de companhia são bem cuidadosos, vi os cuidados, recomendo de olhos fechados e sem dúvida um cliente satisfeito.' },
-                { nome: 'Ernia Alice',     texto: 'Avaliação com excelência absoluta para todos envolvidos da clínica que são para cuidado de animais.' },
-                { nome: 'Antônio Ramirez', texto: 'Excelentes profissionais com todo o cuidado de tratar meu pet na clínica que o trouxemos um final de semana e sentimos compaixão de todos.' },
-                // { nome: 'Nome da pessoa', texto: 'Texto da avaliação...' },
-            ];
+<script>
+  /* Header: transparente só na primeira dobra, sólido ao rolar */
+  const header = document.querySelector('header');
+  const heroCarouselEl = document.getElementById('heroCarousel');
+  function updateHeaderBg(){
+    const threshold = heroCarouselEl.offsetHeight - header.offsetHeight;
+    header.classList.toggle('scrolled', window.scrollY > threshold);
+  }
+  window.addEventListener('scroll', updateHeaderBg);
+  window.addEventListener('resize', updateHeaderBg);
+  updateHeaderBg();
 
-            const track = document.getElementById('reviews-track');
-            const viewport = document.getElementById('reviews-viewport');
-            const GAP = 24;
-            const SPEED = 40;   // pixels por segundo (menor = mais devagar, melhor para ler)
+  /* Carrossel de logos: auto-scroll infinito + arrastar com o mouse */
+  (function(){
+    const marquee = document.getElementById('logoMarquee');
+    const track = document.getElementById('logoTrack');
+    if(!marquee || !track) return;
+    const baseSet = track.querySelector('.logo-set');
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-            const esc = t => t.replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+    let setWidth = 0;
+    let offset = 0;
+    let dragging = false;
+    let dragStartX = 0;
+    let dragStartOffset = 0;
+    const speed = reduceMotion ? 0 : 0.5; // px por frame
 
-            const card = r => {
-                const avatar = '<div class="w-14 h-14 rounded-full bg-brand-light text-brand-dark flex items-center justify-center mr-4 flex-shrink-0">' +
-                    '<svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 12a5 5 0 100-10 5 5 0 000 10zm0 2c-4.42 0-8 2.24-8 5v1a1 1 0 001 1h14a1 1 0 001-1v-1c0-2.76-3.58-5-8-5z"/></svg></div>';
-                return '<div class="review-card shrink-0 w-full md:w-[calc((100%-24px)/2)] lg:w-[calc((100%-48px)/3)] bg-white p-8 rounded-2xl shadow-md border border-gray-100">' +
-                    '<div class="flex items-center mb-4">' + avatar +
-                    '<div><h4 class="font-bold text-gray-900">' + esc(r.nome) + '</h4>' +
-                    '<div class="flex text-yellow-400 text-sm" aria-label="5 estrelas">★★★★★</div></div></div>' +
-                    '<p class="text-gray-600 italic">"' + esc(r.texto) + '"</p></div>';
-            };
+    function buildTrack(){
+      track.querySelectorAll('.logo-set.clone').forEach(el => el.remove());
+      const gap = 20;
+      setWidth = baseSet.getBoundingClientRect().width + gap;
+      const minWidth = marquee.clientWidth * 2 + setWidth;
+      let total = setWidth;
+      while(total < minWidth){
+        const clone = baseSet.cloneNode(true);
+        clone.classList.add('clone');
+        clone.setAttribute('aria-hidden','true');
+        track.appendChild(clone);
+        total += setWidth;
+      }
+    }
 
-            const html = reviews.map(card).join('');
-            const copies = Math.ceil(3 / reviews.length) + 2; // cópias suficientes para nunca ficar espaço vazio
-            track.innerHTML = html.repeat(copies);
+    function wrapOffset(){
+      if(setWidth <= 0) return;
+      offset = ((offset % setWidth) + setWidth) % setWidth;
+    }
 
-            let x = 0, last = null, paused = false;
-            const n = reviews.length;
-            // Largura exata de um ciclo = distância entre o 1º card e o 1º card da cópia (medida em tempo real)
-            const loopWidth = () => track.children[n].offsetLeft - track.children[0].offsetLeft;
+    function render(){
+      track.style.transform = `translateX(${-offset}px)`;
+    }
 
-            viewport.addEventListener('mouseenter', () => paused = true);
-            viewport.addEventListener('mouseleave', () => paused = false);
-            viewport.addEventListener('touchstart', () => paused = true, { passive: true });
-            viewport.addEventListener('touchend', () => paused = false, { passive: true });
+    function tick(){
+      if(!dragging){
+        offset += speed;
+        wrapOffset();
+        render();
+      }
+      requestAnimationFrame(tick);
+    }
 
-            function frame(t) {
-                if (last === null) last = t;
-                const dt = Math.min(t - last, 50) / 1000;
-                last = t;
-                if (!paused) {
-                    const lw = loopWidth();
-                    if (lw > 0) {
-                        x += SPEED * dt;
-                        if (x >= lw) x -= lw;
-                    }
-                    track.style.transform = 'translate3d(' + (-x) + 'px,0,0)';
-                }
-                requestAnimationFrame(frame);
-            }
-            requestAnimationFrame(frame);
-        })();
-    </script>
+    function onPointerDown(e){
+      dragging = true;
+      marquee.setPointerCapture(e.pointerId);
+      dragStartX = e.clientX;
+      dragStartOffset = offset;
+    }
+    function onPointerMove(e){
+      if(!dragging) return;
+      offset = dragStartOffset - (e.clientX - dragStartX);
+      wrapOffset();
+      render();
+    }
+    function onPointerUp(e){
+      if(!dragging) return;
+      dragging = false;
+      try{ marquee.releasePointerCapture(e.pointerId); }catch(err){}
+    }
+
+    marquee.addEventListener('pointerdown', onPointerDown);
+    marquee.addEventListener('pointermove', onPointerMove);
+    marquee.addEventListener('pointerup', onPointerUp);
+    marquee.addEventListener('pointercancel', onPointerUp);
+    marquee.addEventListener('pointerleave', onPointerUp);
+
+    window.addEventListener('resize', ()=>{ buildTrack(); wrapOffset(); render(); });
+    window.addEventListener('load', buildTrack);
+
+    buildTrack();
+    requestAnimationFrame(tick);
+  })();
+
+  /* Menu mobile (hambúrguer) */
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+  const mobileOverlay = document.getElementById('mobileOverlay');
+  function toggleMobileMenu(){
+    hamburgerBtn.classList.toggle('open');
+    mobileMenu.classList.toggle('open');
+    mobileOverlay.classList.toggle('open');
+  }
+  hamburgerBtn.addEventListener('click', toggleMobileMenu);
+  mobileOverlay.addEventListener('click', toggleMobileMenu);
+  mobileMenu.querySelectorAll('a').forEach(a=> a.addEventListener('click', toggleMobileMenu));
+
+  /* Carrossel do Hero (primeira dobra) */
+  const heroSlides = document.querySelectorAll('.hero-slide');
+  const heroCurrentEl = document.getElementById('heroCurrent');
+  const heroBar = document.getElementById('heroBar');
+  const heroPrev = document.getElementById('heroPrev');
+  const heroNext = document.getElementById('heroNext');
+  let heroIndex = 0;
+
+  function goToHero(i){
+    heroIndex = (i + heroSlides.length) % heroSlides.length;
+    heroSlides.forEach((s,idx)=> s.classList.toggle('active', idx === heroIndex));
+    heroCurrentEl.textContent = String(heroIndex + 1).padStart(2,'0');
+    heroBar.style.width = `${((heroIndex+1)/heroSlides.length)*100}%`;
+  }
+  heroPrev.addEventListener('click', ()=>{ goToHero(heroIndex - 1); resetHeroAutoplay(); });
+  heroNext.addEventListener('click', ()=>{ goToHero(heroIndex + 1); resetHeroAutoplay(); });
+
+  let heroAutoplay = setInterval(()=> goToHero(heroIndex + 1), 6500);
+  function resetHeroAutoplay(){ clearInterval(heroAutoplay); heroAutoplay = setInterval(()=> goToHero(heroIndex + 1), 6500); }
+  goToHero(0);
+
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  },{threshold:0.15});
+  revealEls.forEach(el=>io.observe(el));
+
+  /* Carrossel de produtos */
+  const track = document.getElementById('carouselTrack');
+  const slides = track.querySelectorAll('.carousel-slide');
+  const dots = document.querySelectorAll('.carousel-dot');
+  const prevBtn = document.getElementById('carouselPrev');
+  const nextBtn = document.getElementById('carouselNext');
+  let current = 0;
+
+  function goToSlide(i){
+    current = (i + slides.length) % slides.length;
+    track.style.transform = `translateX(-${current * 100}%)`;
+    slides.forEach((s,idx)=> s.classList.toggle('active', idx === current));
+    dots.forEach((d,idx)=> d.classList.toggle('active', idx === current));
+  }
+
+  prevBtn.addEventListener('click', ()=> goToSlide(current - 1));
+  nextBtn.addEventListener('click', ()=> goToSlide(current + 1));
+  dots.forEach(d=> d.addEventListener('click', ()=> goToSlide(parseInt(d.dataset.dot))));
+
+  /* Efeito de "surgindo" ao chegar na seção de produtos */
+  const produtosSection = document.querySelector('.produtos');
+  const produtosIO = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        produtosSection.classList.add('in');
+        produtosIO.unobserve(produtosSection);
+      }
+    });
+  },{threshold:0.3});
+  produtosIO.observe(produtosSection);
+
+  /* Auto-play opcional do carrossel */
+  let autoplay = setInterval(()=> goToSlide(current + 1), 6000);
+  [prevBtn, nextBtn, ...dots].forEach(el=>{
+    el.addEventListener('click', ()=>{ clearInterval(autoplay); });
+  });
+</script>
+
 </body>
 </html>
